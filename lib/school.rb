@@ -1,13 +1,34 @@
-school = School.new("Bayside High School")
+require 'pry'
+class School
+    def initialize(name)
+        @name = name
+        @roster = {}
+    end
 
-school.roster
-#=> {}
+    def roster
+        @roster
+    end
 
-school.add_student("Zach Morris", 9)
-school.roster
-# => {9 => ["Zach Morris"]}
+    def add_student(name, grade)
+        if(roster[grade])
+            roster[grade] << name
+        else 
+            roster[grade] = []
+            roster[grade] << name
+        end
+        roster
+        # binding.pry
+    end
 
-school.add_student("AC Slater", 9)
-school.add_student("Kelly Kapowski", 10)
-school.add_student("Screech", 11)
-school.roster
+    def grade(grade)
+        roster[grade]
+    end
+
+    def sort 
+        roster.each do |key, value|
+            value.sort!
+        end
+        roster.sort.to_h
+    end
+
+end 
